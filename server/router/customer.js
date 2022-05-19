@@ -1,4 +1,5 @@
-const customerRouter = require('express').Router()
+const express = require('express')
+const customerRouter = express.Router()
 const {customerController} = require("../controller")
 
 customerRouter.post('/signup', customerController.signup.post)

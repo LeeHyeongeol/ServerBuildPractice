@@ -1,4 +1,5 @@
-const app = require('express')()
+const express = require("express")
+const app = express()
 const cors = require('cors')
 const PORT = 4000;
 
@@ -16,19 +17,21 @@ const corsOptions = {
 
 app.use(cors(corsOptions))
 
-const myLogger = function (req, res, next) {
-  // res.send('미들웨어')
-  console.log("미들웨어연결성공!")
-  next()
-};
+app.use(express.urlencoded({ extended: false }))
+app.use("/customers", customerRouter);
+app.use("/service", serviceRouter);
 
-app.use(myLogger)
+// const myLogger = function (req, res, next) {
+//   // res.send('미들웨어')
+//   console.log("미들웨어연결성공!")
+//   next()
+// };
+
+// app.use(myLogger)
 
 app.get('/', function (req, res, next) {
   res.send("서버 연동 성공")
 })
-app.use("/customers", customerRouter);
-app.use("/service", serviceRouter);
 
 app.listen(PORT, () => {
   console.log("서버연결되었음")
